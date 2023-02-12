@@ -1,3 +1,7 @@
+from math import remainder
+from multiprocessing.reduction import duplicate
+
+
 class Solution:
   def isPalindrome(self, x: int) -> bool:
     # convert num to string
@@ -11,3 +15,22 @@ class Solution:
       left+=1
       right-=1
     return True
+
+# No String Conversion Solution
+class Solution:
+  def isPalindrome(self, x: int) -> bool:
+    # all negatives are false
+    if abs(x) != x:
+      return False
+    # store reverse
+    reverseNum = 0
+    num = x
+
+    while num > 0:
+      # use modulus to get ones place number
+      remainder = num%10
+      reverseNum *=10
+      reverseNum+=remainder
+      num //=10
+    
+    return reverseNum == x
